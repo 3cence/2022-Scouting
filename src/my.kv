@@ -1,42 +1,124 @@
 <Screen>
     GridLayout:
-        cols: 6
+        cols: 1
         size: root.width, root.height
-        TextInput:
-            hint_text: "Text #"
-        TextInput:
-            hint_text: "Match #"
-        Label:
-            text: ""
-        Label:
-            text: ""
-        Button:
-            text: "Red"
-        Button:
-            text: "Blue"
-        Button:
-            text: "-"
-        TextInput:
-            text: "--" 
-        Button:
-            text: "+"
-        Button:
-            text: "-"
-        TextInput:
-            text: "--" 
-        Button:
-            text: "+"
-        Button:
-            text: "-"
-        TextInput:
-            text: "--" 
-        Button:
-            text: "+"
-        Button:
-            text: "-"
-        TextInput:
-            text: "--" 
-        Button:
-            text: "+"
-
-        
+        GridLayout:
+            cols: 6
+            TextInput:
+                hint_text: "Team #"
+                font_size: 40
+            TextInput:
+                hint_text: "Match #"
+                font_size: 40
+            Label:
+                text: ""
+            Label:
+                text: ""
+            Button:
+                text: "Red"
+                font_size: 60
+                background_color: "red"
+                background_normal: ""
+            Button:
+                text: "Blue"
+                font_size: 60
+                background_color: "blue"
+                background_normal: ""
+            #Auton High
+            Button:
+                text: "-"
+                font_size: 80
+                background_color: "red"
+                background_normal: ""
+            GridLayout:
+                cols: 1
+                Label:
+                    text: "Auton High"
+                    size_hint_y: .2
+                    font_size: 20
+                Label:
+                    text: "0" 
+                    bold: True
+                    font_size: 80
+            Button:
+                text: "+"
+                font_size: 80
+                background_color: "blue"
+                background_normal: ""
+            #Tele High
+            Button:
+                text: "-"
+                font_size: 80
+                background_color: "red"
+                background_normal: ""
+            GridLayout:
+                cols: 1
+                Label:
+                    text: "Teleop High"
+                    size_hint_y: .2
+                    font_size: 20
+                Label:
+                    text: "0" 
+                    bold: True
+                    font_size: 80
+            Button:
+                text: "+"
+                font_size: 80
+                background_color: "blue"
+                background_normal: ""
+            #Auton Low
+            Button:
+                text: "-"
+                font_size: 80
+                background_color: "red"
+                background_normal: ""
+            GridLayout:
+                cols: 1
+                Label:
+                    text: "Auton Low"
+                    size_hint_y: .2
+                    font_size: 20
+                Label:
+                    text: "0" 
+                    bold: True
+                    font_size: 80
+            Button:
+                text: "+"
+                font_size: 80
+                background_color: "blue"
+                background_normal: ""
+            #Tele High
+            Button:
+                text: "-"
+                font_size: 80
+                background_color: "red"
+                background_normal: ""
+            GridLayout:
+                cols: 1
+                Label:
+                    text: "Teleop Low"
+                    size_hint_y: .2
+                    font_size: 20
+                Label:
+                    text: "0" 
+                    bold: True
+                    font_size: 80
+            Button:
+                text: "+"
+                font_size: 80
+                background_color: "blue"
+                background_normal: ""
+        GridLayout:
+            cols: 3
+            size_hint_y: .1
+            Button:
+                text: "Reset"
+                background_color: "red"
+                background_normal: ""
+            Label:
+                text: ""
+            Button:
+                text: "Next"
+                background_color: "green"
+                background_normal: ""
+            
