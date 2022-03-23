@@ -176,6 +176,13 @@ ScreenManager:
 
 <PostmatchScreen>:
     name: "postmatch"
+
+    notesBox: notesbox
+    climberSpin: climberspin
+    barSpin: barspin
+    sucessSpin: sucessspin
+    scouterName: name
+
     GridLayout:
         cols: 1
         size: root.width, root.height
@@ -183,27 +190,32 @@ ScreenManager:
         GridLayout:
             cols: 2
             TextInput:
+                id: notesbox
                 hint_text: "Additional Notes"
             GridLayout:
                 cols: 1
                 TextInput:
+                    id: name
                     hint_text: "Scouter Name"
                     font_size: 50
                 Label:
                     text: "Climber"
                 Spinner:
-                    text: "No"
-                    values: "Yes", "No"
-                Label:
-                    text: "Sucess"
-                Spinner:
+                    id: climberspin
                     text: "No"
                     values: "Yes", "No"
                 Label:
                     text: "Level Attepted"
                 Spinner:
+                    id: barspin
                     text: "None"
                     values: "None", 'Low', 'Medium', 'High', "Trav"
+                Label:
+                    text: "Sucess"
+                Spinner:
+                    id: sucessspin
+                    text: "No"
+                    values: "Yes", "No"
 
         GridLayout:
             cols: 3

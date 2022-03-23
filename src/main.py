@@ -1,4 +1,4 @@
-from curses import window
+# from curses import window
 from game import Game
 import kivy
 from kivy.app import App
@@ -90,25 +90,39 @@ class MatchScreen (Screen):
 
 
 class PostmatchScreen (Screen):
+
+    notesBox = ObjectProperty(None)
+    climberSpin = ObjectProperty(None)
+    barSpin = ObjectProperty(None)
+    sucessSpin = ObjectProperty(None)
+    scouterName = ObjectProperty(None)
+
+    def resetData(self):
+        self.notesBox.text = ""
+        self.climberSpin.text = "No"
+        self.barSpin.text = "None"
+        self.sucessSpin.text = "No"
+
     def matchEnd(self):
-        androidPath = "/storage/emulated/0/Download/2022Scouting/"
+        androidPath = "/storage/emulated/0/Download/"
         windowsPath = "./sheets/"
-        path = windowsPath
+        path = androidPath
         if not os.path.isdir(path):
             os.makedirs(path)
         path += "data.xlsx"
         matchScreen = self.manager.get_screen("match")
-        print("Team #:", matchScreen.teamNum.text, "Match:", matchScreen.matchNum.text, "Ah:", game.autonHigh, "Al:", game.autonLow, "Th:", game.teleopHigh, "Tl:", game.teleopLow, "Team:", game.team)
+        print("Team #:", matchScreen.teamNum.text, "Match:", matchScreen.matchNum.text, "Name:", self.scouterName.text, "Ah:", game.autonHigh, "Al:", game.autonLow, "Th:", game.teleopHigh, "Tl:", game.teleopLow, "Team:", game.team, "Climber:", self.climberSpin.text, "Attempt:", self.barSpin.text, "Sucess:", self.sucessSpin.text, "Notes:", self.notesBox.text)
         try:
-            wb = load_workbook(windowsPath)
+            wb = load_workbook(path)
             ws = wb.active
         except:
             wb = Workbook()
             ws = wb.active
-            ws.append(["Team #", "Match #", "Team", "Auton High", "Auton Low", "Teleop High", "Teleop Low"])
-        ws.append([matchScreen.teamNum.text, matchScreen.matchNum.text, game.team, game.autonHigh, game.autonLow, game.teleopHigh, game.teleopLow])
+            ws.append(["Team #", "Match #", "Team", "Auton High", "Auton Low", "Teleop High", "Teleop Low", "Climber", "Attempt", "Sucess", "Notes"])
+        ws.append([matchScreen.teamNum.text, matchScreen.matchNum.text, game.team, game.autonHigh, game.autonLow, game.teleopHigh, game.teleopLow, self.climberSpin.text, self.barSpin.text, self.sucessSpin.text, self.notesBox.text])
         wb.save(path)
         matchScreen.resetData()
+        self.resetData()
 
 
 class ScreenManager (ScreenManager):
