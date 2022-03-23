@@ -1,4 +1,17 @@
-<Screen>
+ScreenManager: 
+    MatchScreen:
+    PostmatchScreen:
+<Button>:
+    background_color: "orange"
+    background_normal: ""
+
+<Spinner>:
+    color: "black"
+    background_color: "yellow"
+    background_normal: ""
+
+<MatchScreen>:
+    name: "match"
     GridLayout:
         cols: 1
         size: root.width, root.height
@@ -45,6 +58,7 @@
                 font_size: 80
                 background_color: "blue"
                 background_normal: ""
+                on_press: root.autonHighAdd()
             #Tele High
             Button:
                 text: "-"
@@ -121,4 +135,56 @@
                 text: "Next"
                 background_color: "green"
                 background_normal: ""
-            
+                on_release: 
+                    app.root.current = "postmatch"
+                    root.manager.transition.direction = "left"
+
+#############################################################################################################################################
+#################################################--POST MATCH SCREEN--#######################################################################
+#############################################################################################################################################
+
+<PostmatchScreen>:
+    name: "postmatch"
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 2
+            TextInput:
+                hint_text: "Additional Notes"
+            GridLayout:
+                cols: 1
+                TextInput:
+                    hint_text: "Scouter Name"
+                    font_size: 50
+                Label:
+                    text: "Climber"
+                Spinner:
+                    text: "No"
+                    values: "Yes", "No"
+                Label:
+                    text: "Sucess"
+                Spinner:
+                    text: "No"
+                    values: "Yes", "No"
+                Label:
+                    text: "Level Attepted"
+                Spinner:
+                    text: "None"
+                    values: "None", 'Low', 'Medium', 'High', "Trav"
+
+        GridLayout:
+            cols: 3
+            size_hint_y: .1
+            Button:
+                text: "Back"
+                background_color: "red"
+                on_release:
+                    app.root.current = "match"
+                    root.manager.transition.direction = "right"
+            Label:
+                text: ""
+            Button:
+                text: "Finish"
+                background_color: "green"
