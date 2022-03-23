@@ -12,6 +12,12 @@ ScreenManager:
 
 <MatchScreen>:
     name: "match"
+
+    autonHighLbl: autonhigh
+    autonLowLbl: autonlow
+    teleopHighLbl: teleophigh
+    teleopLowLbl: teleoplow
+
     GridLayout:
         cols: 1
         size: root.width, root.height
@@ -43,6 +49,7 @@ ScreenManager:
                 font_size: 80
                 background_color: "red"
                 background_normal: ""
+                on_release: root.removeGoal("ah")
             GridLayout:
                 cols: 1
                 Label:
@@ -50,6 +57,7 @@ ScreenManager:
                     size_hint_y: .2
                     font_size: 20
                 Label:
+                    id: autonhigh
                     text: "0" 
                     bold: True
                     font_size: 80
@@ -58,13 +66,14 @@ ScreenManager:
                 font_size: 80
                 background_color: "blue"
                 background_normal: ""
-                on_press: root.autonHighAdd()
+                on_release: root.addGoal("ah")
             #Tele High
             Button:
                 text: "-"
                 font_size: 80
                 background_color: "red"
                 background_normal: ""
+                on_release: root.removeGoal("th")
             GridLayout:
                 cols: 1
                 Label:
@@ -72,6 +81,7 @@ ScreenManager:
                     size_hint_y: .2
                     font_size: 20
                 Label:
+                    id: teleophigh
                     text: "0" 
                     bold: True
                     font_size: 80
@@ -80,12 +90,14 @@ ScreenManager:
                 font_size: 80
                 background_color: "blue"
                 background_normal: ""
+                on_release: root.addGoal("th")
             #Auton Low
             Button:
                 text: "-"
                 font_size: 80
                 background_color: "red"
                 background_normal: ""
+                on_release: root.removeGoal("al")
             GridLayout:
                 cols: 1
                 Label:
@@ -93,6 +105,7 @@ ScreenManager:
                     size_hint_y: .2
                     font_size: 20
                 Label:
+                    id: autonlow
                     text: "0" 
                     bold: True
                     font_size: 80
@@ -101,12 +114,14 @@ ScreenManager:
                 font_size: 80
                 background_color: "blue"
                 background_normal: ""
+                on_release: root.addGoal("al")
             #Tele High
             Button:
                 text: "-"
                 font_size: 80
                 background_color: "red"
                 background_normal: ""
+                on_release: root.removeGoal("tl")
             GridLayout:
                 cols: 1
                 Label:
@@ -114,6 +129,7 @@ ScreenManager:
                     size_hint_y: .2
                     font_size: 20
                 Label:
+                    id: teleoplow
                     text: "0" 
                     bold: True
                     font_size: 80
@@ -122,6 +138,7 @@ ScreenManager:
                 font_size: 80
                 background_color: "blue"
                 background_normal: ""
+                on_release: root.addGoal("tl")
         GridLayout:
             cols: 3
             size_hint_y: .1
