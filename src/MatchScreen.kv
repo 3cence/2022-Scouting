@@ -7,16 +7,22 @@ ScreenManager:
 
 <Spinner>:
     color: "black"
-    background_color: "yellow"
+    background_color: "blue"
     background_normal: ""
 
 <MatchScreen>:
     name: "match"
 
+    teamNum: teamnum
+    matchNum: matchnum
+
     autonHighLbl: autonhigh
     autonLowLbl: autonlow
     teleopHighLbl: teleophigh
     teleopLowLbl: teleoplow
+
+    redTeamBtn: teamred
+    blueTeamBtn: teamblue
 
     GridLayout:
         cols: 1
@@ -24,25 +30,33 @@ ScreenManager:
         GridLayout:
             cols: 6
             TextInput:
+                id: teamnum
                 hint_text: "Team #"
+                input_type: "number"
                 font_size: 40
             TextInput:
+                id: matchnum
                 hint_text: "Match #"
+                input_type: "number"
                 font_size: 40
             Label:
                 text: ""
             Label:
                 text: ""
             Button:
+                id: teamred
                 text: "Red"
                 font_size: 60
                 background_color: "red"
                 background_normal: ""
+                on_release: root.teamSelect("red")
             Button:
+                id: teamblue
                 text: "Blue"
                 font_size: 60
                 background_color: "blue"
                 background_normal: ""
+                on_release: root.teamSelect("blue")
             #Auton High
             Button:
                 text: "-"
@@ -205,3 +219,7 @@ ScreenManager:
             Button:
                 text: "Finish"
                 background_color: "green"
+                on_release:
+                    root.matchEnd()
+                    app.root.current = "match"
+                    root.manager.transition.direction = "right"
