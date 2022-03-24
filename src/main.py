@@ -20,6 +20,7 @@ game = Game()
 class MatchScreen (Screen):
     teamNum = ObjectProperty(None)
     matchNum = ObjectProperty(None)
+    errorBox = ObjectProperty(None)
 
     autonHighLbl = ObjectProperty(None)
     autonLowLbl = ObjectProperty(None)
@@ -33,6 +34,14 @@ class MatchScreen (Screen):
 
     resetAttemptsGiven = 5
     resetAttempts = resetAttemptsGiven
+
+    def goPostMatch(self):
+        if self.teamNum.text == "" or self.matchNum.text == "" or not self.matchNum.text.isnumeric() or not self.teamNum.text.isnumeric():
+            self.errorBox.text = "Missing or Invalid\nTeam/Match Number"
+            return False
+        else:
+            self.errorBox.text = ""
+            return True
 
     def resetMatch(self, bypass=False):
         postmatchScreen = self.manager.get_screen("postmatch")
@@ -138,7 +147,8 @@ class PostmatchScreen (Screen):
             ws.append(["Team #", "Match #", "Team", "Auton High", "Auton Low", "Teleop High", "Teleop Low", "Climber", "Attempt", "Sucess", "Notes"])
         ws.append([matchScreen.teamNum.text, matchScreen.matchNum.text, game.team, game.autonHigh, game.autonLow, game.teleopHigh, game.teleopLow, self.climberSpin.text, self.barSpin.text, self.sucessSpin.text, self.notesBox.text])
         wb.save(path)
-        matchScreen.matchNum.text = str(int(matchScreen.matchNum.text) + 1)
+        if matchScreen.matchNum.text != "":
+            matchScreen.matchNum.text = str(int(matchScreen.matchNum.text) + 1)
         matchScreen.resetMatch(True)
 
 

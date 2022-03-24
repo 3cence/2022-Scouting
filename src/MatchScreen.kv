@@ -17,6 +17,8 @@ ScreenManager:
     matchNum: matchnum
     resetBtn: resetbtn
 
+    errorBox: errbox
+
     autonHighLbl: autonhigh
     autonLowLbl: autonlow
     teleopHighLbl: teleophigh
@@ -164,13 +166,20 @@ ScreenManager:
                 background_normal: ""
                 on_release: root.resetMatch()
             Label:
+                id: errbox
+                font_size: 25
+                color: "red"
+                halign: 'center'
+                valign: 'center'
+                bold: True
                 text: ""
             Button:
                 text: "Next"
                 background_color: "green"
                 background_normal: ""
                 on_release: 
-                    app.root.current = "postmatch"
+                    if root.goPostMatch():\
+                    app.root.current = "postmatch";\
                     root.manager.transition.direction = "left"
 
 #############################################################################################################################################
