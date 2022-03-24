@@ -48,6 +48,7 @@ class MatchScreen (Screen):
         if self.resetAttempts <= 0 or bypass:
             self.resetAttempts = self.resetAttemptsGiven
             self.resetBtn.text = "Reset"
+            self.errorBox.text = ""
             postmatchScreen.resetData()
             self.resetData()
         else:
@@ -122,6 +123,7 @@ class PostmatchScreen (Screen):
     barSpin = ObjectProperty(None)
     sucessSpin = ObjectProperty(None)
     scouterName = ObjectProperty(None)
+    errorBox = ObjectProperty(None)
 
     def resetData(self):
         self.notesBox.text = ""
@@ -130,26 +132,32 @@ class PostmatchScreen (Screen):
         self.sucessSpin.text = "No"
 
     def matchEnd(self):
-        androidPath = "/storage/emulated/0/Download/"
-        windowsPath = "./sheets/"
-        path = androidPath
-        if not os.path.isdir(path):
-            os.makedirs(path)
-        path += "2022data.xlsx"
-        matchScreen = self.manager.get_screen("match")
-        print("Team #:", matchScreen.teamNum.text, "Match:", matchScreen.matchNum.text, "Name:", self.scouterName.text, "Ah:", game.autonHigh, "Al:", game.autonLow, "Th:", game.teleopHigh, "Tl:", game.teleopLow, "Team:", game.team, "Climber:", self.climberSpin.text, "Attempt:", self.barSpin.text, "Sucess:", self.sucessSpin.text, "Notes:", self.notesBox.text)
-        try:
-            wb = load_workbook(path)
-            ws = wb.active
-        except:
-            wb = Workbook()
-            ws = wb.active
-            ws.append(["Team #", "Match #", "Team", "Auton High", "Auton Low", "Teleop High", "Teleop Low", "Climber", "Attempt", "Sucess", "Notes"])
-        ws.append([matchScreen.teamNum.text, matchScreen.matchNum.text, game.team, game.autonHigh, game.autonLow, game.teleopHigh, game.teleopLow, self.climberSpin.text, self.barSpin.text, self.sucessSpin.text, self.notesBox.text])
-        wb.save(path)
-        if matchScreen.matchNum.text != "":
-            matchScreen.matchNum.text = str(int(matchScreen.matchNum.text) + 1)
-        matchScreen.resetMatch(True)
+        if self.scouterName.text == "":
+            self.errorBox.text = "Missing Scouter Name"
+            return False
+        else:
+            self.errorBox.text = ""
+            androidPath = "/storage/emulated/0/Download/"
+            windowsPath = "./sheets/"
+            path = androidPath
+            if not os.path.isdir(path):
+                os.makedirs(path)
+            path += "2022data.xlsx"
+            matchScreen = self.manager.get_screen("match")
+            print("Team #:", matchScreen.teamNum.text, "Match:", matchScreen.matchNum.text, "Name:", self.scouterName.text, "Ah:", game.autonHigh, "Al:", game.autonLow, "Th:", game.teleopHigh, "Tl:", game.teleopLow, "Team:", game.team, "Climber:", self.climberSpin.text, "Attempt:", self.barSpin.text, "Sucess:", self.sucessSpin.text, "Notes:", self.notesBox.text)
+            try:
+                wb = load_workbook(path)
+                ws = wb.active
+            except:
+                wb = Workbook()
+                ws = wb.active
+                ws.append(["Team #", "Match #", "Team", "Auton High", "Auton Low", "Teleop High", "Teleop Low", "Climber", "Attempt", "Sucess", "Notes"])
+            ws.append([matchScreen.teamNum.text, matchScreen.matchNum.text, game.team, game.autonHigh, game.autonLow, game.teleopHigh, game.teleopLow, self.climberSpin.text, self.barSpin.text, self.sucessSpin.text, self.notesBox.text])
+            wb.save(path)
+            if matchScreen.matchNum.text != "":
+                matchScreen.matchNum.text = str(int(matchScreen.matchNum.text) + 1)
+            matchScreen.resetMatch(True)
+            return True
 
 
 class ScreenManager (ScreenManager):

@@ -194,6 +194,7 @@ ScreenManager:
     barSpin: barspin
     sucessSpin: sucessspin
     scouterName: name
+    errorBox: errbox
 
     GridLayout:
         cols: 1
@@ -240,11 +241,17 @@ ScreenManager:
                     app.root.current = "match"
                     root.manager.transition.direction = "right"
             Label:
+                id: errbox
+                font_size: 25
+                color: "red"
+                halign: 'center'
+                valign: 'center'
+                bold: True
                 text: ""
             Button:
                 text: "Finish"
                 background_color: "green"
                 on_release:
-                    root.matchEnd()
-                    app.root.current = "match"
+                    if root.matchEnd():\
+                    app.root.current = "match";\
                     root.manager.transition.direction = "right"
