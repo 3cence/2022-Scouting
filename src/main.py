@@ -1,4 +1,3 @@
-# from curses import window
 from game import Game
 import kivy
 from kivy.app import App
@@ -139,6 +138,7 @@ class PostmatchScreen (Screen):
             ws.append(["Team #", "Match #", "Team", "Auton High", "Auton Low", "Teleop High", "Teleop Low", "Climber", "Attempt", "Sucess", "Notes"])
         ws.append([matchScreen.teamNum.text, matchScreen.matchNum.text, game.team, game.autonHigh, game.autonLow, game.teleopHigh, game.teleopLow, self.climberSpin.text, self.barSpin.text, self.sucessSpin.text, self.notesBox.text])
         wb.save(path)
+        matchScreen.matchNum.text = str(int(matchScreen.matchNum.text) + 1)
         matchScreen.resetMatch(True)
 
 
