@@ -15,6 +15,7 @@ ScreenManager:
 
     teamNum: teamnum
     matchNum: matchnum
+    resetBtn: resetbtn
 
     autonHighLbl: autonhigh
     autonLowLbl: autonlow
@@ -157,9 +158,11 @@ ScreenManager:
             cols: 3
             size_hint_y: .1
             Button:
+                id: resetbtn
                 text: "Reset"
                 background_color: "red"
                 background_normal: ""
+                on_release: root.resetMatch()
             Label:
                 text: ""
             Button:
@@ -196,6 +199,7 @@ ScreenManager:
                 cols: 1
                 TextInput:
                     id: name
+                    multiline: False
                     hint_text: "Scouter Name"
                     font_size: 50
                 Label:
